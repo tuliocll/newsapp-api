@@ -13,7 +13,7 @@ Api desenvolida para participar da seleção da @Rocketseat.
 ### Faça o clone do projeto:
 
 ```bash
-git clone
+git clone https://github.com/tuliocll/newsapp-api.git
 ```
 
 ### Instale as dependencias:
