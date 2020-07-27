@@ -8,7 +8,7 @@ class NewsSchema extends Schema {
     this.create("news", (table) => {
       table.increments();
       table.string("title");
-      table.string("description");
+      table.text("description");
       table.integer("likes");
       table.integer("user_id").unsigned().references("id").inTable("users");
       table.integer("photo_id").unsigned().references("id").inTable("photos");

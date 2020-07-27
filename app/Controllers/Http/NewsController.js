@@ -19,10 +19,11 @@ class NewsController {
   async index({ request, response }) {
     try {
       const { page = 1 } = request.get();
-      const news = await News.query().paginate(page, 10);
+      const news = await News.query().with("user").paginate(page, 10);
 
       return response.status(200).send(news);
     } catch (err) {
+      console.log(err);
       return response.status(400).send({ message: "Erro ao buscar noticias" });
     }
   }
@@ -64,9 +65,9 @@ class NewsController {
     try {
       const { id } = params;
 
-      const noticia = await News.findOrFail(id);
+      const post = await News.query().with("user").where("id", id).first();
 
-      return response.status(200).send(noticia);
+      return response.status(200).send(post);
     } catch (err) {
       return response
         .status(400)

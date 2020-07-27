@@ -20,11 +20,10 @@ Route.post("sessions", "AuthController.store").validator("Auth");
 
 Route.post("users", "UserController.store").validator("User");
 
-Route.get("news/:id/like", "NewsController.like");
-
 Route.resource("news", "NewsController")
   .validator(new Map([[["store"], ["News"]]]))
-  .middleware(["auth"]);
-Route.resource("photos", "PhotoController").validator(
-  new Map([[["store"], ["Photo"]]])
-);
+  .middleware("auth");
+
+Route.resource("photos", "PhotoController")
+  .validator(new Map([[["store"], ["Photo"]]]))
+

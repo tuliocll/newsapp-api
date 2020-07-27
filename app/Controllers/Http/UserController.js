@@ -7,7 +7,7 @@ class UserController {
     const data = request.only(["username", "email", "password"]);
 
     try {
-      const checkExist = await User.findByOrFail("email", data.email);
+      const checkExist = await User.findBy("email", data.email);
 
       if (checkExist) {
         return response.status(400).send({ message: "Email já cadastrado" });

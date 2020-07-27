@@ -34,24 +34,25 @@ class PhotoController {
         size: "2mb",
       });
 
-      const name = `newsapp-${new Date().getTime()}.${postPhoto.subtype}`;
+      const name = `newsapp-${new Date().getTime()}.${postPhoto.subType}`;
 
       await postPhoto.move(Helpers.tmpPath("uploads"), {
-        name: name,
+        name,
       });
 
       if (!postPhoto.moved()) {
         return response
           .status(400)
-          .send({ message: "Erro ao processar imagem1" });
+          .send({ message: "Erro ao processagem imagem" });
       }
 
       const photo = await Photo.create({ name });
 
-      return photo;
+      return response.status(200).send(photo);
     } catch (err) {
-      console.log(err);
-      return response.status(400).send({ message: "Erro ao processar imagem" });
+      return response
+        .status(400)
+        .send({ message: "Erro ao processagem imagem" });
     }
   }
 
