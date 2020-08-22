@@ -18,12 +18,14 @@ const Route = use("Route");
 
 Route.post("sessions", "AuthController.store").validator("Auth");
 
+Route.get("/", ({ response }) => response.send("Tutorial Login, Tulio Calil"));
+
 Route.post("users", "UserController.store").validator("User");
 
 Route.resource("news", "NewsController")
   .validator(new Map([[["store"], ["News"]]]))
   .middleware("auth");
 
-Route.resource("photos", "PhotoController")
-  .validator(new Map([[["store"], ["Photo"]]]))
-
+Route.resource("photos", "PhotoController").validator(
+  new Map([[["store"], ["Photo"]]])
+);
